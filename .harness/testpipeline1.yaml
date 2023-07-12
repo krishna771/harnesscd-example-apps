@@ -1,0 +1,37 @@
+pipeline:
+  name: test-pipeline-1
+  identifier: testpipeline1
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: https://github.com/krishna771/harnesscd-example-apps
+        build: <+input>
+  stages:
+    - stage:
+        name: Radha
+        identifier: Radha
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Windows
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    repo: krishnacwa/ks8demo
+                    tags:
+                      - v1dev
